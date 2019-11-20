@@ -2,11 +2,11 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -30,4 +30,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#home{
+  display: flexbox;
+  background-color: aqua;
+  justify-content: left;
+  justify-items: left;
+  align-items: left;
+  float: left;
+}
+
+#homeContainer{
+  display: flex;
+  justify-content: left;
+  justify-items: left;
+  align-items: left;
+  float: left;
 }
