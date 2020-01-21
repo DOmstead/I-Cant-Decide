@@ -2,12 +2,6 @@
   text-align: center;
 }
 
-/* .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-} */
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -19,32 +13,62 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover{
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-#home{
-  display: flexbox;
-  background-color: aqua;
+.home{
+  background-color: rgb(189, 226, 226);
+  margin-top: 20px;
+  font-size: 18pt;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
   justify-content: left;
   justify-items: left;
   align-items: left;
   float: left;
+  outline: none;
+  clear: both;
 }
 
-#homeContainer{
+.homeContainer{
   display: flex;
   justify-content: left;
   justify-items: left;
   align-items: left;
   float: left;
+  clear: both;
+}
+
+.getStartedButton, .displayRecipe, .tryAgain{
+  display:inline-block;
+  padding:0.46em 1.6em;
+  border:0.1em solid #000000;
+  margin:0 0.2em 0.2em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#000000;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  background-color:rgb(189, 226, 226);
+  text-align:center;
+  transition: all 0.15s;
+}
+
+.getStartedButton:hover, .displayRecipe:hover, .tryAgain:hover{
+  color:rgb(22, 20, 107);
+  border-color:#FFFFFF;
+  }
+
+@media screen and (min-width: 768px){
+
+  .home{
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    margin-top: 0px;
+  }
 }

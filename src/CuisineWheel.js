@@ -1,34 +1,40 @@
 import React from 'react';
 import './CuisineWheel.css';
 import PropTypes from 'prop-types';
+import seedrandom from 'seedrandom';
+
 
 class CuisineWheel extends React.Component{
     constructor(props){
         super(props);
-        this.state = {cuisine:"", isToggleOn: true, cuisineArr:["African","American","British","Cajun","Caribbean","Chinese","European","French","German","Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Mexican","Southern","Spanish","Thai","Vietnamese","Nordic"],
-        spinAngleStart: 0, startAngle: 0, spinTime: 0, arc: Math.PI / (22 / 2) };
+        this.state = {cuisine:"", isToggleOn: true, spinPressed: false, cuisineArr:["African","American","British","Cajun","Caribbean","Chinese","European","French","German","Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Mexican","Southern","Spanish","Thai","Vietnamese","Nordic"],
+        rngSpinAngle: 0, startAngle: 0, spinTime: 0, arc: Math.PI / (22 / 2) };
         this.spinTimer = null;
         this.handleOnClick = this.handleOnClick.bind(this);
         this.spin = this.spin.bind(this);
         this.rotate = this.rotate.bind(this);
-        // These lines line used during development for debugging
-        // this.handleClick = this.handleClick.bind(this)
-        // this.myClick = this.myClick.bind(this)
     }
 
+    //The following variables, along with the corresponding import, create a seedable Math.random() style function for more 
+    //effective random number generation.
+
+    seedrandom = require('seedrandom');
+    rng = seedrandom();
+    rngSpinAngle = this.rng() * 22 + 22;
+    rngSpinTime = this.rng() * 3 + 4 * 1000;
+
+    //These items establish the correct type for each variable
     static propTypes = {
         className: PropTypes.string,
         options: PropTypes.array,
         baseSize: PropTypes.number,
-        spinAngleStart: PropTypes.number,
-        spinTimeTotal: PropTypes.number,
+        rngSpinAngle: PropTypes.number,
+        rngSpinTime: PropTypes.number,
         onComplete: PropTypes.func,
       };
 
     static defaultProps = {
         baseSize: 275,
-        spinAngleStart: Math.random() * 10 + 10,
-        spinTimeTotal: Math.random() * 3 + 4 * 1000,
       }
 
       //The following three functions handle the color assignment for each section of the RouletteWheel
@@ -53,10 +59,8 @@ class CuisineWheel extends React.Component{
         return this.RGB2Color(red,green,blue);
       }
 
+      //This section sets up the basic paramaters for the RouletteWheel.
       drawRouletteWheel() {
-        // const spinTimeout = null;
-        // const spinTime = 0;
-        // const spinTimeTotal = 0;
         const { baseSize } = this.props;
         let { startAngle, arc } = this.state;
         let ctx;
@@ -88,6 +92,7 @@ class CuisineWheel extends React.Component{
             ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
             ctx.restore();
           }
+          
           //The section below controls the creation and styling for the RouletteWheel arrow symbol.
           ctx.fillStyle = 'red';
           ctx.beginPath();
@@ -106,12 +111,12 @@ class CuisineWheel extends React.Component{
 
       //This section is responsible for the math and function calls related to the rotation animation for the RouletteWheel
       rotate(){
-        const { spinAngleStart, spinTimeTotal } = this.props;
         if(this.state.spinTime > 2800) {
           clearTimeout(this.spinTimer);
           this.stopRotateWheel();
         } else {
-          const spinAngle = spinAngleStart - this.easeOut(this.state.spinTime, 0, spinAngleStart, spinTimeTotal);
+          const spinAngle = this.rngSpinAngle - this.easeOut(this.state.spinTime, 0, this.rngSpinAngle, this.rngSpinTime);
+          
           this.setState({
             startAngle: this.state.startAngle + spinAngle * Math.PI / 180,
             spinTime: this.state.spinTime + 30,
@@ -123,7 +128,8 @@ class CuisineWheel extends React.Component{
         }
       }
 
-      //This section controls what happens when the RouletteWheel is set to stop.
+      //This section controls what happens when the RouletteWheel is set to stop. It is responsible for the visual effect and
+      //setting the corresponding state.
       stopRotateWheel() {
         let { startAngle, arc } = this.state;
         const { baseSize } = this.props;
@@ -136,13 +142,12 @@ class CuisineWheel extends React.Component{
         ctx.font = 'bold 25px Roboto, Arial';
         ctx.fillStyle = 'white';
         const text = this.state.cuisineArr[index]
-        //The line below controls the positioning of the text that appears inside the wheel.
         ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize);
         ctx.restore();
-        console.log(this.state.spinTime);
         if(this.state.spinTime === 2820){
             this.setState({cuisine: text, spinTime: 0})
             this.props.changeCuisine(text)
+            this.toggleSpinState();
         }
       }
 
@@ -156,77 +161,28 @@ class CuisineWheel extends React.Component{
         this.spin();
       }
 
-    componentDidMount(){
+      componentDidMount(){
         this.drawRouletteWheel()
-        console.log("Componenet Mounted. Line 19.")
-    }
+      }
 
-    //These functions were used for debugging during the creation process. 
-
-    // componentDidUpdate(){
-    //     if(this.state.cuisine !== ""){
-    //         console.log("Wheel componentDidUpdate Ran")
-    //         console.log(this.state.cuisine);
-    //     }
-    // }
-
-    // myClick(food){
-    //     console.log("i was clicked!!!!");
-    //     this.setState({cuisine:food})
-    // }
-
-    //This is a working example of toggling the state
-    // handleClick(){
-    //     this.setState(state => ({
-    //         isToggleOn: !state.isToggleOn
-    //     }));
-    //     console.log(this.state.isToggleOn)
-    // }
-
-    // This is a working example of toggling the state
-    // handleClick(){
-    //     this.setState(food => ({
-    //         cuisine: food
-    //     }));
-    //     console.log(this.state.isToggleOn)
-    // }
-
-    // handleClick(food){
-    //         this.setState(state => ({
-    //             cuisine: state.food
-    //         }))
-    // }
-
+      toggleSpinState(){
+          this.setState({spinPressed: true});
+      }
 
     render(){
         const { baseSize } = this.props;
-
         return(
             <div>
-                <h2>Click Choose My Cuisine to get started!</h2>
+                <h2>Click the SPIN button to get started!</h2>
                 <div className="roulette">
                     <div className="roulette-container">
                     <canvas ref="canvas" width={baseSize * 2} height={baseSize * 2} className="roulette-canvas"></canvas>
                     </div>
                     <div className="roulette-container">
-                    <input type="button" value="Choose My Cuisine" onClick={this.handleOnClick} className="button" id="spin" />
+                    {this.state.spinPressed === false && <input type="button" value="SPIN" onClick={this.handleOnClick} className="button" id="spinButton" />}
+                    {this.state.spinPressed && <input type="button" value="Spin Again" onClick={this.handleOnClick} className="button" id="spinButton2" />}
                     </div>
                 </div>
-                
-                {/* The lines below was previously used to establish a button for each cuisine option */}
-                
-                {/* {this.state.cuisineArr.map((food, index) => <button key= {index} onClick= { () => {this.props.changeCuisine(food)}}>{food}</button>)} */}
-                {/* {this.state.cuisineArr.map((food, index) => <button key= {index} onClick= {() => {this.setState( {cuisine:food}); recipeApi(`${food}`)}}>{food}</button>)} */}
-                
-                {/* The lines below were used during the devleopment of this componenet and are left in for review reasons */}
-                {/* recipeApi(`${food}`) */}
-                {/* <button type="submit" onClick={() => { this.props.removeTaskFunction(todo) }}>Submit</button> */}
-                {/* <button onClick= {this.handleClick}>African</button> */}
-                {/* <button onClick= {this.setState({cuisine:'Jewish'})}>Jewish</button> */}
-                {/* <button onClick= {this.myClick()}>Cajun</button> */}
-                {/* <button onClick = {(e)=> this.handleClick(e)}>Chinese</button> */}
-                {/* <button>Italian</button> */}
-                {/* <button onClick= {() => {this.props.changeCuisine(this.state.cuisineArr[Math.floor(Math.random() * 25)] )}}>Choose My Cuisine!</button> */}
             </div>
         );
     }

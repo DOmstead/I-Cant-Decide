@@ -11,8 +11,6 @@ class App extends React.Component {
 
   updateCuisine = (food) => {
     this.setState({cuisine: food });
-    // console.log(`updateCuisine ran and got ${food}`)
-    // console.log(this.state.cuisine)
   }
 
   recipeToggle = () => {
@@ -31,25 +29,21 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div id= "homeContainer">
-          <button class= "home" id= "home" onClick = {() => this.setState({startingPage: true, CuisineWheel:false, RecipeComp:false, cuisine: "", newRecipe:false})}>I Can't Decide Home</button>
+          <div className= "homeContainer">
+          <button className= "home" onClick = {() => this.setState({startingPage: true, CuisineWheel:false, RecipeComp:false, cuisine: "", newRecipe:false})}>Home</button>
           </div>
           { this.state.startingPage &&
           <div>
             <h1> I Can't Decide!</h1>
-            <h3> An app to help you choose.</h3>
-            <p> Select an option below. </p>
-            <button onClick = {() => {this.setState(prevState => ({CuisineWheel: !prevState.CuisineWheel, startingPage: !prevState.startingPage}))}}>I can't Decide what to cook! </button>
-            {/* <button>Help me choose from a custom list(WIP)</button> */}
-            {/* <button onClick = {() => console.log(this.state)}>Check State</button> */}
+            <h3> An app to help you choose</h3>
+            <p> Click below to get started! </p>
+            <button className="getStartedButton" onClick = {() => {this.setState(prevState => ({CuisineWheel: !prevState.CuisineWheel, startingPage: !prevState.startingPage}))}}>I Can't Decide what to cook! </button>
           </div>
           }
           {this.state.CuisineWheel && <CuisineWheel changeCuisine={this.updateCuisine} />}
           {this.state.RecipeComp && <RecipeComp cuisine ={this.state.cuisine}/>}
-          {/* {this.state.cuisine !== "" && <button onClick = {this.recipeToggle}>{`${this.state.cuisine} sounds delicious! Show me my recipe!`}</button>} */}
-          {this.state.cuisine !== "" && !this.state.newRecipe && <button onClick = {() => {this.recipeToggle(); this.cuisineWheelToggle(); this.newRecipeToggle()}}>{`${this.state.cuisine} sounds delicious! Show me my recipe!`}</button>}
-          {this.state.cuisine !== "" && this.state.newRecipe && <button onClick = {() => {this.cuisineWheelToggle(); this.recipeToggle(); this.setState({cuisine:""}); this.newRecipeToggle() }} >{`Let's Try Again`}</button>}
-          {/* <button onClick = {() => console.log(this.state)}>Check State</button> */}
+          {this.state.cuisine !== "" && !this.state.newRecipe && <button className="displayRecipe" onClick = {() => {this.recipeToggle(); this.cuisineWheelToggle(); this.newRecipeToggle()}}>{`${this.state.cuisine} sounds delicious! Show me my recipe!`}</button>}
+          {this.state.cuisine !== "" && this.state.newRecipe && <button className= "tryAgain" onClick = {() => {this.cuisineWheelToggle(); this.recipeToggle(); this.setState({cuisine:""}); this.newRecipeToggle() }} >{`Let's Try Again`}</button>}
         </header>
       </div>
     );

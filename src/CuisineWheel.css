@@ -1,3 +1,27 @@
-/* button {
-    
-} */
+#spinButton, #spinButton2 {
+    width: 200px;
+    height: 200px /10;
+    line-height: 200px;
+    text-align: center;
+    text-shadow: 2px 2px dimgrey;
+    font-size: 36pt;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #f74d4d;
+    outline: none;
+    margin-bottom: 15px;
+    max-height: 50%;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f74d4d), color-stop(100%, #f86569));
+}
+
+#spinButton2{
+  width: 100px;
+  height: 100px;
+  font-size: 12pt;
+  line-height: 20px;
+  text-shadow: 0.5px 0.5px dimgrey;
+}
+
+.roulette-canvas{
+  max-width: 90%;
+}
