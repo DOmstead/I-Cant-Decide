@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## I Can’t Decide!
 
-## Available Scripts
+An app to help you choose.
 
-In the project directory, you can run:
+"I Can't Decide!" An app to help you choose! Can't decide what to eat tonight? What plate to make or even what type of cuisine sounds best? This app is for you. "I Can't Decide!" helps choose from over 20+ types of cuisine on your behalf and then utilizes the Spoonacular API to select from more than 350,000+ delicious recipes that you can cook in the comfort of your own home. This app helps bring delicious and new creations to life on your kitchen table, without having to go through the trials of making the decision yourself. Something sound yummy tonight but don’t know what that is? Stop stressing and let "I Can't Decide!" do the work for you!
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was coded from scratch using Javascript, React, Node, HTML5, and CSS3. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Live Link
 
-### `npm test`
+Use the link below to see “I Can’t Decide!” live.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://domstead.github.io/I-Cant-Decide/
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screen Shots
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Users will spin the roulette wheel to have a type of cuisine chosen on their behalf. Once a style of cuisine has been selected they can continue forward and a recipe meeting those requirements will be chosen on their behalf!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![I Can't Decide Roullette Wheel](https://user-images.githubusercontent.com/49734565/72671678-03bd2480-3a0b-11ea-853c-0f068c4a3633.png)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![I Can't Decide Recipe Result](https://user-images.githubusercontent.com/49734565/72671680-0b7cc900-3a0b-11ea-93fc-bfd20e9be935.png)
